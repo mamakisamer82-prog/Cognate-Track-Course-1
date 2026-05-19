@@ -1,0 +1,62 @@
+<img width="1912" height="851" alt="Lab Exercise 1 1" src="https://github.com/user-attachments/assets/fa64bbcc-a8c6-460a-8fa2-4f83d7e6679b" />
+
+
+LED Ping‑Pong Effect Using Arduino Uno
+
+
+To design and implement a circuit that controls 12 LEDs using Arduino Uno.
+To program the LEDs to light sequentially from right to left, then left to right.
+To apply arrays and loops in Arduino programming for efficient control of multiple outputs.
+Materials
+Arduino Uno board
+Breadboard
+12 LEDs
+12 resistors (220Ω)
+Jumper wires
+Arduino IDE / Tinkercad Circuits
+Procedure
+Circuit Assembly
+
+I created the circuit in Tinkercad by placing an Arduino Uno and a breadboard in the workspace.
+I arranged 12 LEDs in a row on the breadboard.
+Each LED’s cathode was connected to the ground rail.
+Each LED’s anode was connected to a resistor, then wired to Arduino digital pins 2–13.
+The Arduino GND pin was connected to the ground rail of the breadboard.
+Programming
+
+I opened the Arduino IDE (or Tinkercad code editor).
+I wrote the following C++ program to control the LEDs:
+cpp
+ 
+int ledPins[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+int numLeds = sizeof(ledPins) / sizeof(ledPins[0]);
+int delayTime = 150;
+
+void setup() {
+for (int i = 0; i < numLeds; i++) {
+pinMode(ledPins[i], OUTPUT);
+}
+}
+
+void loop() {
+for (int i = numLeds - 1; i >= 0; i--) {
+digitalWrite(ledPins[i], HIGH);
+delay(delayTime);
+digitalWrite(ledPins[i], LOW);
+}
+
+for (int i = 0; i < numLeds; i++) {
+digitalWrite(ledPins[i], HIGH);
+delay(delayTime);
+digitalWrite(ledPins[i], LOW);
+}
+}
+
+Simulation
+
+I clicked Start Simulation in Tinkercad.
+The LEDs lit up sequentially from right to left, then reversed from left to right, repeating continuously.
+Results
+The circuit successfully demonstrated the ping‑pong LED effect.
+The LEDs responded correctly to the programmed sequence.
+Conclusion
