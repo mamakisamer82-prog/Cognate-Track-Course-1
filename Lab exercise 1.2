@@ -1,0 +1,84 @@
+<img width="1238" height="804" alt="image" src="https://github.com/user-attachments/assets/dd84c078-1786-424c-b5ed-10cc31844fb9" />
+
+To design and program a 12‑LED circuit using Arduino Uno that begins lighting from LED #7, spreads outward pair by pair with a 500 ms delay, and folds back inward.
+
+
+Arduino Uno board
+Breadboard
+12 LEDs
+12 resistors (220Ω)
+Jumper wires
+Arduino IDE / Tinkercad Circuits
+Procedure
+Circuit Assembly
+I created the circuit in Tinkercad by dragging an Arduino Uno and a breadboard into the workspace.
+I placed 12 LEDs in a row on the breadboard.
+Each LED’s cathode was connected to the ground rail.
+Each LED’s anode was connected to a resistor, then wired to Arduino digital pins 2–13.
+I connected the Arduino GND pin to the ground rail of the breadboard.
+Programming
+I opened the Arduino IDE (or Tinkercad code editor).
+I wrote the following program to control the LEDs:
+
+cpp
+int ledPins[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+int numLeds = sizeof(ledPins) / sizeof(ledPins[0]);
+int delayTime = 500;
+
+void setup() {
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  int center = 6; // LED #7 is index 6
+
+
+  digitalWrite(ledPins[center], HIGH);
+  delay(delayTime);
+  digitalWrite(ledPins[center], LOW);
+
+
+  for (int offset = 1; offset < numLeds / 2; offset++) {
+    int left = center - offset;
+    int right = center + offset;
+
+    if (left >= 0 && right < numLeds) {
+      digitalWrite(ledPins[left], HIGH);
+      digitalWrite(ledPins[right], HIGH);
+      delay(delayTime);
+      digitalWrite(ledPins[left], LOW);
+      digitalWrite(ledPins[right], LOW);
+    }
+  }
+
+
+  for (int offset = numLeds / 2 - 1; offset >= 1; offset--) {
+    int left = center - offset;
+    int right = center + offset;
+
+    if (left >= 0 && right < numLeds) {
+      digitalWrite(ledPins[left], HIGH);
+      digitalWrite(ledPins[right], HIGH);
+      delay(delayTime);
+      digitalWrite(ledPins[left], LOW);
+      digitalWrite(ledPins[right], LOW);
+    }
+  }
+
+  // blink center again
+  digitalWrite(ledPins[center], HIGH);
+  delay(delayTime);
+  digitalWrite(ledPins[center], LOW);
+}
+Simulation
+
+I clicked Start Simulation in Tinkercad.
+
+The LEDs lit up starting from LED #7, then spread outward pair by pair with a 500 ms delay, and folded back inward to the center.
+
+Results
+The circuit successfully demonstrated the desired ping‑pong effect starting at LED #7.
+
+The LEDs responded correctly to the programmed sequence.
