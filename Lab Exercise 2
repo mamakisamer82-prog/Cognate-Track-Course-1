@@ -1,0 +1,7 @@
+![Uploading image.png…]()
+
+For my design, I wanted to ensure both hardware stability and a precise user experience.
+On the hardware side, I designed the buttons with pull-down resistors so the Arduino gets a clean, stable signal without any random bouncing or interference.
+On the software side, I designed the logic around State Change Detection. I structured it so that exactly one click equals one count (+1 or -1). Even if a user
+long-presses or holds the button down, the system is designed to ignore it and prevent it from counting fast. It forces the counter to wait until the button is 
+fully released and clicked again, making the interface completely precise and reliable.
